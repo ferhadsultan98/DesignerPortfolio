@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио Дизайнера</title>
+    <title>Портфолио Дизайнера v2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* Общие стили */
+        /* ОБНОВЛЕННЫЕ СТИЛИ */
+
+        :root {
+            --primary-dark: #0D0D0D; /* Очень темный, почти черный */
+            --secondary-dark: #1A1A1A; /* Темно-серый для секций */
+            --accent-color: #8A2BE2; /* Яркий фиолетовый (BlueViolet) */
+            --accent-hover: #7B1FA2; /* Темнее фиолетовый для ховера */
+            --text-primary: #F5F5F5; /* Очень светлый, почти белый */
+            --text-secondary: #A0A0A0; /* Светло-серый для второстепенного текста */
+            --border-color: #333333; /* Цвет для границ */
+        }
+
         body {
             margin: 0;
-            font-family: 'Manrope', sans-serif;
-            background-color: #121212; /* Темный фон */
-            color: #e0e0e0; /* Светлый текст */
-            overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
@@ -24,74 +35,68 @@
             box-sizing: border-box;
         }
 
-        /* Стили для контейнера с 3D фоном */
+        /* Фон с 3D фигурами - делаем их более утонченными */
         .background3dShapes {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Позади всего контента */
+            z-index: -1;
             overflow: hidden;
         }
 
         .shape {
             position: absolute;
-            border-radius: 10px;
-            opacity: 0.1; /* Полупрозрачные */
+            opacity: 0.07; /* Еще более прозрачные */
+            border: 1px solid var(--accent-color); /* Контурные фигуры */
         }
 
         .shape1 {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, #6a0dad, #0077b6); /* Фиолетово-синий */
-            top: 10%;
-            left: 5%;
-            animation: animateShape 20s infinite linear alternate;
+            width: 200px; height: 200px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Органическая форма */
+            top: 5%; left: 10%;
+            animation: animateShape 25s infinite linear alternate;
         }
 
         .shape2 {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(45deg, #00b4d8, #48cae4); /* Голубой */
-            bottom: 15%;
-            right: 10%;
-            animation: animateShape 25s infinite linear alternate-reverse;
+            width: 250px; height: 250px;
+            border-radius: 50%;
+            bottom: 10%; right: 5%;
+            animation: animateShape 30s infinite linear alternate-reverse;
         }
 
         .shape3 {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #ff006e, #ff70a6); /* Розовый */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: animateShape 15s infinite linear alternate;
+            width: 150px; height: 150px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg); /* Повернутый квадрат */
+            animation: animateShape 20s infinite linear alternate;
         }
         
-        .shape4 {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #fca311, #ffb703); /* Оранжево-желтый */
-            top: 20%;
-            right: 20%;
+        .shape4 { /* Дополнительная мелкая деталь */
+            width: 80px; height: 80px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            top: 20%; right: 25%;
             animation: animateShape 18s infinite linear alternate-reverse;
         }
 
 
         @keyframes animateShape {
             0% {
-                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.9);
+                border-color: var(--accent-color);
             }
             50% {
-                transform: translateY(50px) translateX(30px) rotate(180deg) scale(1.1);
+                transform: translateY(40px) translateX(20px) rotate(180deg) scale(1);
+                border-color: var(--accent-hover);
             }
             100% {
-                transform: translateY(-20px) translateX(-40px) rotate(360deg) scale(0.9);
+                transform: translateY(-30px) translateX(-30px) rotate(360deg) scale(0.9);
+                border-color: var(--accent-color);
             }
         }
 
-        /* Стили для хедера */
+        /* Хедер */
         .mainHeader {
             position: fixed;
             top: 0;
@@ -101,18 +106,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000; /* Поверх всего */
-            background-color: rgba(18, 18, 18, 0.8); /* Полупрозрачный фон для хедера */
-            backdrop-filter: blur(10px);
-            transition: background-color 0.3s ease;
+            z-index: 1000;
+            background-color: rgba(13, 13, 13, 0.7); /* --primary-dark с альфа */
+            backdrop-filter: blur(12px); /* Усиленный блюр */
+            border-bottom: 1px solid rgba(51, 51, 51, 0.5); /* var(--border-color) с альфа */
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+        
+        .mainHeader.isScrolled { /* Стили хедера при скролле */
+            padding: 15px 50px;
+            background-color: rgba(13, 13, 13, 0.85);
         }
 
         .logoContainer .logoText {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
+            font-family: 'Merriweather', serif;
+            font-size: 26px;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-primary);
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .logoContainer .logoText:hover {
+            color: var(--accent-color);
         }
         
         .mainNavigation ul {
@@ -123,22 +138,23 @@
         }
 
         .mainNavigation li {
-            margin-left: 30px;
-            position: relative; /* Для выпадающего меню */
+            margin-left: 35px; /* Немного больше отступ */
+            position: relative;
         }
 
         .mainNavigation a {
             text-decoration: none;
-            color: #e0e0e0;
+            color: var(--text-secondary);
             font-size: 16px;
             font-weight: 500;
-            padding: 10px 0;
+            padding: 10px 5px;
             position: relative;
             transition: color 0.3s ease;
         }
 
-        .mainNavigation a:hover {
-            color: #00b4d8; /* Акцентный цвет при наведении */
+        .mainNavigation a:hover,
+        .mainNavigation li.isActiveLink a { /* Активная ссылка */
+            color: var(--text-primary);
         }
 
         .mainNavigation a::after {
@@ -146,359 +162,420 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #00b4d8;
-            transition: width 0.3s ease;
+            bottom: 0px; /* Ближе к тексту */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Плавная анимация */
         }
 
-        .mainNavigation a:hover::after {
+        .mainNavigation a:hover::after,
+        .mainNavigation li.isActiveLink a::after {
             width: 100%;
         }
         
-        /* Стили для выпадающего меню */
-        .dropdownMenu {
-            display: none; /* Скрыто по умолчанию */
-            position: absolute;
-            top: 100%; /* Появляется под родительским элементом */
-            left: 0;
-            background-color: #2a2a2a; /* Фон выпадающего меню */
-            border-radius: 5px;
-            padding: 10px 0;
-            min-width: 180px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 1001;
+        .mainNavigation .hasDropdown > a i { /* Иконка стрелки */
+            margin-left: 6px;
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+        
+        .mainNavigation .hasDropdown:hover > a i {
+            transform: rotate(180deg);
         }
 
-        .hasDropdown:hover .dropdownMenu,
-        .hasDropdown.open .dropdownMenu { /* Показываем при наведении или при классе open */
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+        /* Выпадающее меню */
+        .dropdownMenu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px); /* Немного ниже */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary-dark);
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform-origin: top center;
+            animation: fadeInDropdown 0.3s ease forwards;
+            z-index: 1001;
+            border: 1px solid var(--border-color);
+        }
+        
+        @keyframes fadeInDropdown {
+            from { opacity: 0; transform: translateX(-50%) scaleY(0.95) translateY(-5px); }
+            to { opacity: 1; transform: translateX(-50%) scaleY(1) translateY(0); }
+        }
+
+
+        .hasDropdown:hover .dropdownMenu {
+            display: block; /* JS будет управлять классом для мобильных */
         }
 
         .dropdownMenu a {
             display: block;
-            padding: 10px 20px;
-            color: #e0e0e0;
+            padding: 12px 20px;
+            color: var(--text-secondary);
             font-size: 15px;
+            white-space: nowrap;
         }
         
-        .dropdownMenu a::after { /* Убираем подчеркивание для ссылок в дропдауне */
-            display: none;
-        }
+        .dropdownMenu a::after { display: none; }
 
         .dropdownMenu a:hover {
-            background-color: #00b4d8;
-            color: #121212;
+            background-color: var(--accent-color);
+            color: var(--text-primary);
         }
         
-        .menuToggle { /* Для мобильного меню */
+        /* Кнопка мобильного меню */
+        .menuToggle {
             display: none;
-            color: #e0e0e0;
+            color: var(--text-primary);
             font-size: 24px;
-            background: none;
+            background: transparent;
             border: none;
             cursor: pointer;
+            padding: 10px;
+            z-index: 1101; /* Поверх мобильного меню, когда оно закрыто */
+            transition: color 0.3s ease;
+        }
+        .menuToggle:hover {
+            color: var(--accent-color);
         }
 
-        /* Основной контейнер для страниц */
+        /* Основной контейнер */
         .pageWrapper {
-            perspective: 1000px; /* Для 3D эффекта */
+            /* perspective: 1000px; // Оставим, но эффект наложения будет основной */
         }
 
-        /* Стили для секций (страниц) */
+        /* Секции */
         .pageSection {
-            height: 100vh; /* Каждая секция занимает всю высоту экрана */
+            min-height: 100vh; /* Используем min-height для гибкости контента */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 50px; /* Учитываем высоту хедера */
+            padding: 100px 50px; /* Больше отступы */
             position: sticky;
             top: 0;
-            background-color: #1a1a1a; /* Немного светлее основного фона для видимости наложения */
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.3); /* Тень для эффекта глубины */
+            background-color: var(--secondary-dark);
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.4);
             transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
-            will-change: transform, opacity; /* Оптимизация производительности */
-            overflow: hidden; /* Скрываем контент, выходящий за пределы секции */
+            will-change: transform, opacity;
+            overflow: hidden;
         }
 
-        /* Первая секция не должна быть sticky, чтобы остальные могли "наезжать" на нее */
         .pageSection:first-child {
             position: relative; 
-            z-index: 1; /* Начальный z-index */
+            z-index: 5; /* Герой всегда наверху стека вначале */
         }
-        
-        /* Стили для контента внутри секций */
+        /* Последующие секции */
+        #about { z-index: 4; background-color: #181818; }
+        #portfolio { z-index: 3; background-color: #161616; }
+        #contact { z-index: 2; background-color: #141414; }
+
+
         .sectionContent {
-            max-width: 900px;
+            max-width: 960px; /* Немного шире */
             text-align: center;
-            animation: fadeInContent 1s ease-out forwards;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
         }
         
-        .pageSection.isActive .sectionContent { /* Анимация при активации секции */
+        .pageSection.isActive .sectionContent {
              opacity: 1;
              transform: translateY(0);
-             transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s; /* Задержка для анимации */
-        }
-
-
-        @keyframes fadeInContent {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .pageSection h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #ffffff;
-            line-height: 1.2;
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem); /* Адаптивный размер */
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -1px;
         }
         
         .pageSection h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #00b4d8; /* Акцентный цвет для подзаголовков */
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 40px; /* Больше отступ снизу */
+            color: var(--accent-color);
+            position: relative;
+            display: inline-block; /* Для подчеркивания */
+            padding-bottom: 10px;
         }
+        /* Декоративное подчеркивание для H2 */
+        .pageSection h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-hover);
+            border-radius: 2px;
+        }
+
 
         .pageSection p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            max-width: 700px;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            line-height: 1.9;
+            margin-bottom: 35px;
+            max-width: 750px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--text-secondary);
+        }
+        #hero p { /* Для главного экрана текст поярче */
+            color: var(--text-primary); 
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
         }
 
-        /* Стили для кнопок */
+        /* Кнопки */
         .customButton {
             display: inline-block;
-            padding: 15px 35px;
-            background-color: #00b4d8; /* Акцентный цвет */
-            color: #121212; /* Темный текст на светлой кнопке */
+            padding: 16px 40px;
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
-            border-radius: 50px; /* Скругленные углы */
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            border-radius: 8px; /* Менее круглые */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-size 0.4s ease;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: none;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3); /* Тень от акцентного цвета */
+            background-size: 200% auto; /* Для градиентной анимации при ховере */
         }
-
+        
         .customButton:hover {
-            transform: translateY(-5px) scale(1.05);
-            background-color: #0096c7; /* Немного темнее при наведении */
-            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.3);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+            background-position: right center; /* Сдвиг градиента */
         }
         
         .customButton.outline {
-            background-color: transparent;
-            color: #00b4d8;
-            border: 2px solid #00b4d8;
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: none;
         }
         
         .customButton.outline:hover {
-            background-color: #00b4d8;
-            color: #121212;
+            background: var(--accent-color);
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
         
-        /* Параллакс элементы внутри секций */
-        .parallaxElement {
-            transition: transform 0.5s ease-out; /* Плавность для параллакса */
-        }
-
-        /* Дизайн секций */
-        #hero {
-            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('https://source.unsplash.com/random/1600x900/?abstract,dark,design') no-repeat center center/cover;
-            z-index: 5; /* Выше чем обычные секции */
-        }
-        
-        #about { background-color: #1f1f1f; z-index: 4; }
-        #portfolio { background-color: #242424; z-index: 3; }
-        #contact { background-color: #1c1c1c; z-index: 2; }
-
-        /* Стили для сетки портфолио */
+        /* Сетка портфолио */
         .portfolioGrid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Немного больше minmax */
+            gap: 35px;
             width: 100%;
         }
 
         .portfolioItem {
-            background-color: #2a2a2a;
-            border-radius: 10px;
+            background-color: #222; /* Темнее для контраста */
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 1px solid var(--border-color);
         }
         
         .portfolioItem:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.5);
         }
 
         .portfolioItem img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             display: block;
+            filter: grayscale(30%); /* Немного приглушить изображение */
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .portfolioItem:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
         .portfolioItemContent {
-            padding: 20px;
+            padding: 25px;
         }
         
         .portfolioItemContent h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: #00b4d8;
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            color: var(--accent-color);
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .portfolioItemContent p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 0;
-            line-height: 1.6;
+            line-height: 1.7;
+            color: var(--text-secondary);
         }
         
-        /* Стили для формы контактов */
+        /* Форма контактов */
         .contactForm {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
         }
         
         .contactForm input,
         .contactForm textarea {
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #2a2a2a;
-            color: #e0e0e0;
+            padding: 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #252525; /* Чуть светлее для полей */
+            color: var(--text-primary);
             font-size: 1rem;
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .contactForm input::placeholder,
-        .contactForm textarea::placeholder {
-            color: #888;
+        .contactForm input:focus,
+        .contactForm textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
+            outline: none;
         }
         
-        .contactForm textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .contactForm button {
-            align-self: flex-start; /* Кнопка не растягивается на всю ширину */
-        }
+        .contactForm textarea { min-height: 160px; resize: vertical; }
         
         /* Футер */
         .mainFooter {
-            padding: 30px 50px;
+            padding: 40px 50px;
             text-align: center;
-            background-color: #0f0f0f;
-            color: #aaa;
+            background-color: var(--primary-dark);
+            color: var(--text-secondary);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
         }
         
         .socialIcons a {
-            color: #aaa;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
+            color: var(--text-secondary);
+            margin: 0 12px;
+            font-size: 1.6rem;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
         
         .socialIcons a:hover {
-            color: #00b4d8;
+            color: var(--accent-color);
+            transform: scale(1.1);
         }
-
 
         /* Адаптивность */
         @media (max-width: 768px) {
             .mainHeader {
                 padding: 15px 20px;
             }
+            .mainHeader.isScrolled {
+                padding: 10px 20px;
+            }
 
+            /* Стилизация мобильного меню */
             .mainNavigation {
-                display: none; /* Скрываем навигацию */
-                position: absolute;
-                top: 100%; /* Под хедером */
+                position: fixed; /* Фиксируем относительно окна */
+                top: 0;
                 left: 0;
                 width: 100%;
-                background-color: rgba(18, 18, 18, 0.95);
+                height: 100vh; /* На весь экран */
+                background-color: rgba(18,18,18, 0.98); /* Почти непрозрачный фон */
+                backdrop-filter: blur(15px);
                 flex-direction: column;
                 align-items: center;
+                justify-content: center; /* Центрируем пункты по вертикали */
                 padding: 20px 0;
+                opacity: 0;
+                visibility: hidden; /* Скрываем, но доступно для анимации */
+                transform: translateY(-100%); /* Начальное положение за экраном */
+                transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+                            transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                            visibility 0.5s;
+                z-index: 1100; /* Поверх хедера, но под кнопкой закрытия */
             }
             
-            .mainNavigation.isActive { /* Показываем, если есть класс isActive */
-                display: flex;
+            .mainNavigation.isActive {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0%);
+            }
+
+            .mainNavigation ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
 
             .mainNavigation li {
-                margin-left: 0;
-                margin-bottom: 15px;
-                width: 100%;
+                margin: 0; /* Убираем отступы слева */
+                width: 80%; /* Задаем ширину для центрирования текста */
                 text-align: center;
             }
             
             .mainNavigation a {
-                font-size: 18px;
+                display: block; /* Чтобы занимали всю ширину li */
+                font-size: 22px; /* Крупнее для мобильных */
+                padding: 20px 0; /* Больше вертикальные отступы */
+                color: var(--text-primary);
+                border-bottom: 1px solid rgba(51, 51, 51, 0.5); /* Разделители */
             }
+             .mainNavigation li:last-child a {
+                border-bottom: none; /* Убираем границу у последнего элемента */
+            }
+
+            .mainNavigation a:hover,
+            .mainNavigation li.isActiveLink a {
+                color: var(--accent-color);
+            }
+            .mainNavigation a::after { display: none; } /* Убираем подчеркивание для мобильных */
             
             .dropdownMenu { /* Выпадающее меню на мобильных */
-                position: static; /* Меняем позиционирование */
+                position: static;
                 background-color: transparent;
                 box-shadow: none;
-                padding-left: 20px; /* Отступ для вложенности */
+                border: none;
+                padding-left: 0;
+                animation: none; /* Убираем анимацию для мобильных дропдаунов */
+                display: none; /* По умолчанию скрыто, JS управляет */
+                width: 100%;
             }
-            
+            .mainNavigation .hasDropdown.isOpenMobile .dropdownMenu { /* Показываем, если есть класс */
+                 display: block;
+            }
+
             .dropdownMenu a {
-                 padding: 8px 20px;
+                 padding: 15px 20px;
+                 font-size: 18px; /* Чуть меньше основного */
+                 color: var(--text-secondary);
+                 background-color: rgba(0,0,0,0.1); /* Легкий фон для вложенности */
             }
+             .dropdownMenu a:hover {
+                 color: var(--accent-color);
+                 background-color: rgba(0,0,0,0.2);
+             }
 
-            .menuToggle {
-                display: block; /* Показываем кнопку меню */
-            }
+            .menuToggle { display: block; }
 
-            .pageSection h1 {
-                font-size: 2.5rem;
-            }
-            
-            .pageSection h2 {
-                font-size: 2rem;
-            }
-
-            .pageSection p {
-                font-size: 1rem;
-            }
-            
-            .portfolioGrid {
-                grid-template-columns: 1fr; /* Один столбец на мобильных */
-            }
-            
-            .shape {
-                opacity: 0.05; /* Менее навязчивый фон на мобильных */
-            }
-            .shape1 { width: 100px; height: 100px; }
-            .shape2 { width: 120px; height: 120px; }
-            .shape3 { width: 80px; height: 80px; }
+            .pageSection h1 { font-size: clamp(2rem, 8vw, 3rem); }
+            .pageSection h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+            .pageSection p { font-size: clamp(0.9rem, 4vw, 1rem); }
+            .portfolioGrid { grid-template-columns: 1fr; }
         }
 
     </style>
@@ -512,11 +589,11 @@
         <div class="shape shape4"></div>
     </div>
 
-    <header class="mainHeader">
+    <header class="mainHeader" id="mainHeader">
         <div class="logoContainer">
             <a href="#hero" class="logoText">Дизайнер</a>
         </div>
-        <button class="menuToggle" id="menuToggle" aria-label="Открыть меню">
+        <button class="menuToggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false">
             <i class="fas fa-bars"></i>
         </button>
         <nav class="mainNavigation" id="mainNav">
@@ -526,9 +603,9 @@
                 <li class="hasDropdown">
                     <a href="#portfolio">Портфолио <i class="fas fa-chevron-down fa-xs"></i></a>
                     <ul class="dropdownMenu">
-                        <li><a href="#portfolio-web">Веб-дизайн</a></li>
+                        <li><a href="#portfolio">Все проекты</a></li> {/* Изменено для простоты */}
+                        <li><a href="#portfolio-web">Веб-дизайн</a></li> {/* Предполагается, что такие ID могут быть у подсекций */}
                         <li><a href="#portfolio-branding">Брендинг</a></li>
-                        <li><a href="#portfolio-motion">Моушн</a></li>
                     </ul>
                 </li>
                 <li><a href="#contact">Контакты</a></li>
@@ -539,50 +616,50 @@
     <div class="pageWrapper">
         <section id="hero" class="pageSection">
             <div class="sectionContent">
-                <h1 class="parallaxElement" data-parallax-speed="0.2">Имя Фамилия</h1>
-                <p class="parallaxElement" data-parallax-speed="0.1">Креативный дизайнер | UI/UX Специалист | Визуализатор идей</p>
-                <a href="#portfolio" class="customButton parallaxElement" data-parallax-speed="0.05">Смотреть работы</a>
+                <h1>Имя Фамилия</h1>
+                <p>Креативный дизайнер интерфейсов и визуальных коммуникаций.</p>
+                <a href="#portfolio" class="customButton">Мои работы <i class="fas fa-arrow-right fa-xs" style="margin-left: 8px;"></i></a>
             </div>
         </section>
 
         <section id="about" class="pageSection">
             <div class="sectionContent">
-                <h2>Обо мне</h2>
-                <p class="parallaxElement" data-parallax-speed="0.1">Привет! Я [Ваше Имя], дизайнер из [Ваш Город/Страна]. Моя страсть — создавать не только красивые, но и функциональные интерфейсы, которые решают задачи пользователей и бизнеса. Я верю в силу минимализма, продуманной типографики и интуитивно понятного взаимодействия.</p>
-                <p class="parallaxElement" data-parallax-speed="0.05">Опыт работы более X лет в сферах веб-дизайна, мобильных приложений и брендинга. Всегда в поиске новых вызовов и интересных проектов!</p>
-                <a href="#contact" class="customButton outline parallaxElement" data-parallax-speed="0.05">Связаться со мной</a>
+                <h2>Немного о себе</h2>
+                <p>Создаю осмысленные и привлекательные цифровые продукты. Моя цель — превращать сложные идеи в интуитивно понятные и эстетически совершенные решения. Я увлечен деталями, которые делают пользовательский опыт незабываемым.</p>
+                <a href="#contact" class="customButton outline">Обсудить проект</a>
             </div>
         </section>
 
         <section id="portfolio" class="pageSection">
-            <div class="sectionContent" style="max-width: 1200px;"> <h2>Мои Работы</h2>
+            <div class="sectionContent" style="max-width: 1200px;">
+                <h2>Избранные проекты</h2>
                 <div class="portfolioGrid">
-                    <div class="portfolioItem parallaxElement" data-parallax-speed="0.1">
-                        <img src="https://source.unsplash.com/random/400x300/?website,design" alt="Проект 1">
+                    <div class="portfolioItem">
+                        <img src="https://source.unsplash.com/random/400x300/?abstract,purple,design" alt="Проект 1">
                         <div class="portfolioItemContent">
-                            <h3>Проект "Альфа"</h3>
-                            <p>Разработка дизайна для корпоративного веб-сайта.</p>
+                            <h3>Концепт веб-платформы</h3>
+                            <p>UI/UX дизайн для инновационного сервиса.</p>
                         </div>
                     </div>
-                    <div class="portfolioItem parallaxElement" data-parallax-speed="0.15">
-                        <img src="https://source.unsplash.com/random/400x300/?app,interface" alt="Проект 2">
+                    <div class="portfolioItem">
+                        <img src="https://source.unsplash.com/random/400x300/?dark,app,interface" alt="Проект 2">
                         <div class="portfolioItemContent">
-                            <h3>Мобильное приложение "Бета"</h3>
-                            <p>UI/UX дизайн для iOS и Android приложения.</p>
+                            <h3>Мобильное приложение "Nova"</h3>
+                            <p>Полный цикл дизайна для стартапа.</p>
                         </div>
                     </div>
-                    <div class="portfolioItem parallaxElement" data-parallax-speed="0.1">
-                        <img src="https://source.unsplash.com/random/400x300/?branding,logo" alt="Проект 3">
+                    <div class="portfolioItem">
+                        <img src="https://source.unsplash.com/random/400x300/?tech,branding,logo" alt="Проект 3">
                         <div class="portfolioItemContent">
-                            <h3>Брендинг "Гамма"</h3>
-                            <p>Создание фирменного стиля и логотипа.</p>
+                            <h3>Ребрендинг "Cygnus"</h3>
+                            <p>Разработка нового фирменного стиля.</p>
                         </div>
                     </div>
-                     <div class="portfolioItem parallaxElement" data-parallax-speed="0.15">
-                        <img src="https://source.unsplash.com/random/400x300/?dashboard,ui" alt="Проект 4">
+                     <div class="portfolioItem">
+                        <img src="https://source.unsplash.com/random/400x300/?minimal,dashboard,ui" alt="Проект 4">
                         <div class="portfolioItemContent">
-                            <h3>Интерфейс "Дельта"</h3>
-                            <p>Дизайн аналитической панели управления.</p>
+                            <h3>Интерактивная панель</h3>
+                            <p>Дизайн дашборда для аналитики данных.</p>
                         </div>
                     </div>
                 </div>
@@ -591,13 +668,13 @@
 
         <section id="contact" class="pageSection">
             <div class="sectionContent">
-                <h2>Свяжитесь со мной</h2>
-                <p class="parallaxElement" data-parallax-speed="0.1">Есть интересный проект или просто хотите сказать привет? Не стесняйтесь писать!</p>
-                <form class="contactForm parallaxElement" data-parallax-speed="0.05">
+                <h2>Давайте создадим что-то вместе!</h2>
+                <p>Если у вас есть идея, проект или вы просто хотите узнать больше — напишите мне.</p>
+                <form class="contactForm">
                     <input type="text" name="name" placeholder="Ваше имя" required>
                     <input type="email" name="email" placeholder="Ваш Email" required>
-                    <textarea name="message" placeholder="Ваше сообщение" required></textarea>
-                    <button type="submit" class="customButton">Отправить сообщение <i class="fas fa-paper-plane fa-sm"></i></button>
+                    <textarea name="message" placeholder="Расскажите о вашем проекте..." required></textarea>
+                    <button type="submit" class="customButton">Отправить <i class="fas fa-paper-plane fa-sm" style="margin-left: 8px;"></i></button>
                 </form>
             </div>
         </section>
@@ -605,217 +682,146 @@
 
     <footer class="mainFooter">
         <div class="socialIcons">
-            <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
-            <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" aria-label="Behance" target="_blank"><i class="fab fa-behance"></i></a>
+            <a href="#" aria-label="Dribbble" target="_blank"><i class="fab fa-dribbble"></i></a>
+            <a href="#" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
         </div>
-        <p>&copy; <span id="currentYear"></span> Ваше Имя. Все права защищены.</p>
+        <p>&copy; <span id="currentYear"></span> Ваше Имя. Дизайн и разработка.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.pageSection');
-            const header = document.querySelector('.mainHeader');
+            const mainHeader = document.getElementById('mainHeader');
             const mainNav = document.getElementById('mainNav');
             const menuToggle = document.getElementById('menuToggle');
-            const parallaxElements = document.querySelectorAll('.parallaxElement');
-            const dropdowns = document.querySelectorAll('.hasDropdown');
+            const sections = document.querySelectorAll('.pageSection');
+            const navLinks = mainNav.querySelectorAll('a[href^="#"]'); // Только якорные ссылки из навигации
+            const dropdownToggles = mainNav.querySelectorAll('.hasDropdown > a');
 
-            // Установка текущего года в футере
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // --- Эффект наложения страниц при прокрутке и активация секций ---
-            // Этот эффект более сложен для чистого 3D "наезда" без JS-манипуляций с transform.
-            // Здесь используется position:sticky, что создает базовый эффект наложения.
-            // Для более выраженного 3D эффекта (уменьшение предыдущей секции и т.д.)
-            // потребовался бы более сложный JS для отслеживания scroll-прогресса внутри каждой секции.
-            // Этот базовый вариант фокусируется на активации контента.
+            // --- Эффект "прилипания" хедера и активная ссылка ---
+            let currentActiveSectionId = null;
 
-            let lastScrollTop = 0;
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '-50% 0px -50% 0px', // Активация, когда секция в центре экрана
+                threshold: 0 // Как только хотя бы часть целевого элемента в зоне rootMargin
+            };
 
-            function handleScroll() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        currentActiveSectionId = entry.target.id;
+                    }
+                });
+                updateActiveNavLink();
+            }, observerOptions);
 
-                // Эффект для хедера (изменение фона при скролле)
-                if (scrollTop > 50) {
-                    header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            function updateActiveNavLink() {
+                navLinks.forEach(link => {
+                    link.parentElement.classList.remove('isActiveLink');
+                    if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
+                        link.parentElement.classList.add('isActiveLink');
+                    }
+                });
+            }
+
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    mainHeader.classList.add('isScrolled');
                 } else {
-                    header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
+                    mainHeader.classList.remove('isScrolled');
                 }
 
-                // Активация секций и параллакс
-                sections.forEach((section, index) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    const scrollPosition = scrollTop + window.innerHeight / 2; // Активация по центру экрана
-
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        if (!section.classList.contains('isActive')) {
-                            section.classList.add('isActive');
-                        }
-                    } else {
-                         // Можно добавить деактивацию, если нужно (section.classList.remove('isActive');)
-                         // но для эффекта "проявления" это может быть не нужно.
-                    }
-
-                    // Простой параллакс для элементов внутри видимой части секции
-                    // Этот параллакс будет срабатывать для элементов внутри всего документа,
-                    // для более точного, привязанного к видимости секции, нужна доп. логика.
-                    const parallaxSpeed = parseFloat(section.dataset.parallaxSpeed || 0);
-                    if (parallaxSpeed) { // Если у самой секции есть data-parallax-speed
-                         section.style.transform = `translateY(${ (scrollTop - sectionTop) * parallaxSpeed }px)`;
-                    }
-                });
-                
-                // Параллакс для отдельных элементов
-                parallaxElements.forEach(el => {
-                    const speed = parseFloat(el.dataset.parallaxSpeed) || 0.1;
-                    // Расчет смещения относительно центра элемента или верха окна
-                    const rect = el.getBoundingClientRect();
-                    // Простой эффект: двигаем элемент медленнее, чем скролл
-                    // Более сложный эффект потребует расчета относительно "центра" видимой области элемента
-                    const elementScrollEffect = (scrollTop - (el.offsetTop - window.innerHeight / 2)) * speed * 0.5;
-                     // el.style.transform = `translateY(${elementScrollEffect}px)`; // Этот вариант может конфликтовать с анимацией fadeInContent
-
-                    // Более простой вариант для параллакса на основе положения элемента в окне:
-                    const movement = -(rect.top * speed * 0.1); // Можно настроить множитель
-                    if (rect.top < window.innerHeight && rect.bottom > 0) { // Если элемент в видимой области
-                        // Убедимся, что не перезаписываем transform от fadeInContent не вовремя
-                        if (el.closest('.pageSection').classList.contains('isActive')) {
-                           // el.style.transform = `translateY(${movement}px)`; // Аккуратно! Может конфликтовать
-                        }
-                    }
-                });
-
-
-                // --- Начало логики для "наезда" секций ---
-                // Эта часть более сложная и требует точной настройки
-                // Для настоящего 3D-эффекта (одна страница уходит "вглубь" под другую)
-                // нужно изменять transform (scale, translateZ) предыдущих секций.
-                // CSS 'position: sticky' уже создает эффект наложения.
-                // Чтобы усилить его, можно сделать следующее:
-                sections.forEach((section, i) => {
+                // Активация анимации контента секции
+                sections.forEach(section => {
                     const rect = section.getBoundingClientRect();
-                    const distanceToTop = rect.top; // Расстояние от верха окна до верха секции
-
-                    if (distanceToTop < 0 && distanceToTop > -section.offsetHeight) {
-                        // Секция "прокручивается" под текущей верхней sticky секцией
-                        // Можно применить scale или translateZ к section (или ее .sectionContent)
-                        // Чем больше |distanceToTop|, тем сильнее эффект.
-                        // Например, для секции, которая УЖЕ НЕ НА САМОМ ВЕРХУ (i > 0)
-                        // и которая сейчас "подъезжает" или "уезжает"
-                        
-                        // Этот коэффициент определяет, насколько сильно секция будет уменьшаться/смещаться
-                        // когда она "уходит" под следующую.
-                        const scaleFactor = Math.max(0.8, 1 - Math.abs(distanceToTop) / (section.offsetHeight * 2));
-                        const opacityFactor = Math.max(0.5, 1 - Math.abs(distanceToTop) / section.offsetHeight);
-
-                        // Применяем к предыдущим секциям, которые уже "проехали"
-                        if (i < getCurrentStickySectionIndex()) {
-                           // section.style.transform = `scale(${scaleFactor}) translateZ(${-Math.abs(distanceToTop)/3}px)`;
-                           // section.style.opacity = `${opacityFactor}`;
-                        } else {
-                           // section.style.transform = 'scale(1) translateZ(0px)';
-                           // section.style.opacity = '1';
-                        }
-
-                    } else if (distanceToTop >= 0) { // Секция еще не достигла верха или находится наверху
-                        // section.style.transform = 'scale(1) translateZ(0px)';
-                        // section.style.opacity = '1';
+                    // Активируем, если верхняя часть секции видна (или почти видна)
+                    if (rect.top < window.innerHeight * 0.75 && rect.bottom >= 0) {
+                        section.classList.add('isActive');
                     }
-
-                    // Для эффекта, когда текущая секция "наезжает" на предыдущую,
-                    // предыдущие должны уменьшаться.
-                    // Это сложная логика, которая требует точного отслеживания, какая секция "главная" (полностью на экране).
-                    // CSS 'position: sticky' обрабатывает само наложение.
-                    // Дополнительные transform для 3D эффекта лучше делать очень аккуратно.
+                    // Можно добавить else { section.classList.remove('isActive'); } если нужна деактивация при выходе из поля зрения
                 });
+            });
 
 
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-            }
-
-            function getCurrentStickySectionIndex() {
-                let currentIdx = 0;
-                sections.forEach((section, index) => {
-                    if (section.getBoundingClientRect().top <= 1) { // <=1 чтобы учесть погрешности
-                        currentIdx = index;
-                    }
-                });
-                return currentIdx;
-            }
-
-
-            window.addEventListener('scroll', handleScroll);
-            handleScroll(); // Первоначальный вызов для установки состояний
-
-            // Мобильное меню
+            // --- Мобильное меню ---
             menuToggle.addEventListener('click', () => {
-                mainNav.classList.toggle('isActive');
+                const isExpanded = mainNav.classList.toggle('isActive');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
                 const icon = menuToggle.querySelector('i');
-                if (mainNav.classList.contains('isActive')) {
+                if (isExpanded) {
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-times');
-                    header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)'; // Чтобы меню не было прозрачным
+                    document.body.style.overflow = 'hidden'; // Блокируем скролл фона
                 } else {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
-                    // Возвращаем прозрачность хедера в зависимости от скролла
-                    if (window.pageYOffset <= 50) {
-                         header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
-                    }
+                    document.body.style.overflow = '';
                 }
             });
-            
+
             // Закрытие мобильного меню при клике на ссылку
             mainNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mainNav.classList.contains('isActive')) {
-                        mainNav.classList.remove('isActive');
-                        menuToggle.querySelector('i').classList.remove('fa-times');
-                        menuToggle.querySelector('i').classList.add('fa-bars');
-                         if (window.pageYOffset <= 50) {
-                             header.style.backgroundColor = 'rgba(18, 18, 18, 0.8)';
+                link.addEventListener('click', (e) => {
+                    // Если это не ссылка, открывающая дропдаун на мобильном
+                    if (!link.parentElement.classList.contains('hasDropdown') || window.innerWidth > 768) {
+                        if (mainNav.classList.contains('isActive')) {
+                            mainNav.classList.remove('isActive');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.querySelector('i').classList.remove('fa-times');
+                            menuToggle.querySelector('i').classList.add('fa-bars');
+                            document.body.style.overflow = '';
+                        }
+                    } else if (window.innerWidth <= 768 && link.parentElement.classList.contains('hasDropdown')) {
+                        // Для мобильных устройств, если это родительская ссылка дропдауна
+                        e.preventDefault(); // Предотвращаем переход по ссылке #portfolio
+                        link.parentElement.classList.toggle('isOpenMobile');
+                    }
+                });
+            });
+            
+            // Плавная прокрутка (дополнительно к CSS scroll-behavior)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && href.startsWith('#') && document.querySelector(href)) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            // Учитываем высоту хедера при прокрутке, если он фиксированный
+                            const headerOffset = mainHeader.offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - headerOffset;
+                        
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
                         }
                     }
                 });
             });
-
-            // Плавная прокрутка для якорных ссылок (если scroll-behavior: smooth не везде работает)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    // Проверяем, что это действительно якорная ссылка на элемент на странице
-                    if (href.length > 1 && document.querySelector(href)) {
-                        e.preventDefault();
-                        document.querySelector(href).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
             
-            // Управление выпадающими меню (для доступности и если JS нужен для анимации)
-            // CSS :hover уже обрабатывает это, но JS может дать больше контроля
-            dropdowns.forEach(dropdown => {
-                const link = dropdown.querySelector('a'); // Первая ссылка, которая триггерит
-                link.addEventListener('click', function(e) {
-                    // Если у ссылки есть href="#" или она ведет на эту же страницу,
-                    // предотвращаем переход, чтобы открыть/закрыть меню.
-                    // Если это ссылка на секцию, то пусть переход сработает.
-                    if (this.getAttribute('href') === '#' || this.parentElement.classList.contains('hasDropdown')) {
-                         if (window.innerWidth <= 768) { // Только на мобильных, где :hover может не работать как надо
-                            e.preventDefault();
-                            // Просто переключаем класс open, остальное сделает CSS
-                            this.parentElement.classList.toggle('open');
-                         }
-                    }
-                });
-            });
+            // Первоначальная проверка для анимации первой секции и активной ссылки
+            setTimeout(() => {
+                 const firstSection = document.querySelector('.pageSection');
+                 if (firstSection) firstSection.classList.add('isActive');
+                 currentActiveSectionId = sections[0] ? sections[0].id : null;
+                 updateActiveNavLink();
+            }, 100);
+
 
         });
     </script>
 
 </body>
 </html>
+
