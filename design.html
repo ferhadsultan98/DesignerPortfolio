@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rusca Design | Yaratıcı Tasarım Portfolyosu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --accent-color: #f05454;
+            --accent-color-light: #f27979;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #666666;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --glass-bg: rgba(30, 30, 30, 0.7);
+            --transition-slow: 0.5s ease;
+            --transition-medium: 0.3s ease;
+            --transition-fast: 0.2s ease;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .sectionTitle {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .sectionTitle::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -10px;
+        }
+        
+        .sectionSubtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--text-primary);
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-color);
+            transition: width var(--transition-medium);
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color var(--transition-medium);
+            padding: 1.5rem 0;
+        }
+        
+        .headerScrolled {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        
+        .navContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 101;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .navLinks {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .navLink {
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .navLink::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -5px;
+            transition: width var(--transition-medium);
+        }
+        
+        .navLink:hover::after {
+            width: 100%;
+        }
+        
+        .navLink.active::after {
+            width: 100%;
+        }
+        
+        .mobileMenuToggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 101;
+        }
+        
+        /* Hero Section */
+        .heroSection {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .heroBackground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .heroBg1, .heroBg2, .heroBg3 {
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        .heroBg1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            filter: blur(40px);
+            animation: floatAnimation 15s ease-in-out infinite;
+        }
+
+        .heroBg2 {
+            bottom: 15%;
+            right: 10%;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #3498db 0%, transparent 70%);
+            filter: blur(40px);
+            animation: floatAnimation 20s ease-in-out infinite reverse;
+        }
+
+        .heroBg3 {
+            top: 40%;
+            right: 25%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #9b59b6 0%, transparent 70%);
+            filter: blur(30px);
+            animation: floatAnimation 18s ease-in-out infinite 2s;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(20px, -20px) scale(1.1);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+        
+        .heroContent {
+            max-width: 700px;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .heroTitle {
+            font-size: 4.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+        
+        .heroTitle span {
+            color: var(--accent-color);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .heroSubtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+        
+        .heroBtns {
+            display: flex;
+            gap: 1.5rem;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1.1s;
+        }
+        
+        .scrollIndicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s, bounce 2s infinite 1.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* About Section */
+        .aboutSection {
+            padding: 10rem 0;
+            position: relative;
+            background-color: var(--darker-bg);
+        }
+        
+        .aboutContent {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .aboutImage {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .aboutImageWrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%; /* 4:5 aspect ratio */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+        
+        .aboutImageInner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #222;
+            background-image: url('/api/placeholder/600/750');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .aboutImageDecorator {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 60%;
+            height: 60%;
+            border: 4px solid var(--accent-color);
+            border-radius: 10px;
+            z-index: -1;
+        }
+        
+        .aboutText {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .aboutText p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .aboutStats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .statItem {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .statNumber {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .statTitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Services Section */
+        .servicesSection {
+            padding: 10rem 0;
+            position: relative;
+        }
+        
+        .servicesBackground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        .servicesGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .serviceCard {
+            background-color: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            transition: transform var(--transition-medium);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .serviceCard:hover {
+            transform: translateY(-10px);
+        }
+        
+        .serviceIcon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .serviceTitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .serviceDesc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .serviceLink {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .serviceLink i {
+            margin-left: 0.5rem;
+            transition: transform var(--transition-fast);
+        }
+        
+        .serviceLink:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Portfolio Section */
+        .portfolioSection {
+            padding: 10rem 0;
+            background-color: var(--darker-bg);
+            position: relative;
+        }
+        
+        .portfolioTabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .portfolioTab {
+            cursor: pointer;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background-color: transparent;
+            border: 1px solid var(--text-tertiary);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .portfolioTab.active {
+            background-color: var(--accent-color);
+            color: var(--text-primary);
+            border-color: var(--accent-color);
+        }
+        
+        .portfolioTab:hover:not(.active) {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .portfolioGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolioItem {
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+        
+        .portfolioImage {
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            background-color: #222;
+            background-size: cover;
+            background-position: center;
+            transition: transform var(--transition-slow);
+        }
+        
+        .portfolioItem:hover .portfolioImage {
+            transform: scale(1.1);
+        }
+        
+        .portfolioOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+        
+        .portfolioItem:hover .portfolioOverlay {
+            opacity: 1;
+        }
+        
+        .portfolioTitle {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform var(--transition-medium);
+        }
+        
+        .portfolioCategory {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            transform: translateY(20px);
+            transition: transform var(--transition-medium);
+        }
+        
+        .portfolioItem:hover .portfolioTitle,
+        .portfolioItem:hover .portfolioCategory {
+            transform: translateY(0);
+        }
+        
+        /* Testimonials Section */
+        .testimonialsSection {
+            padding: 10rem 0;
+            position: relative;
+        }
+        
+        .testimonialSlider {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .testimonialWrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonialItem {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+        
+        .testimonialCard {
+            background-color: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        
+        .testimonialQuote {
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--accent-color);
+            opacity: 0.2;
+        }
+        
+        .testimonialText {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonialAuthor {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonialAvatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .testimonialAvatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonialInfo {
+            line-height: 1.4;
+        }
+        
+        .testimonialName {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .testimonialRole {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+        
+        .testimonialNav {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .testimonialNavBtn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .testimonialNavBtn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .testimonialDots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+        
+        .testimonialDot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--text-tertiary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .testimonialDot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.2);
+        }
+        
+        /* Contact Section */
+        .contactSection {
+            padding: 10rem 0;
+            background-color: var(--darker-bg);
+            position: relative;
+        }
+        
+        .contactGridWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+        }
+        
+        .contactInfo {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contactInfoItems {
+            margin-top: 2rem;
+        }
+        
+        .contactInfoItem {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .contactInfoIcon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contactInfoContent h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contactInfoContent p {
+            color: var(--text-secondary);
+        }
+        
+        .socialLinks {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .socialLink {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .socialLink:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .contactForm {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .inputGroup {
+            margin-bottom: 1.5rem;
+        }
+        
+        .inputGroup label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .formInput {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            transition: all var(--transition-fast);
+        }
+        
+        .formInput:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(240, 84, 84, 0.2);
+        }
+        
+        textarea.formInput {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .contactBtn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .contactBtn:hover {
+            background-color: var(--accent-color-light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footerTop {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footerCol {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footerTitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footerTitle::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -8px;
+        }
+        
+        .footerNav {
+            list-style: none;
+        }
+        
+        .footerNav li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footerNav a {
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+        
+        .footerNav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footerContact p {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footerContact i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .footerBottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-tertiary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .sectionTitle {
+                font-size: 2.5rem;
+            }
+            
+            .heroTitle {
+                font-size: 3.5rem;
+            }
+            
+            .navLinks {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right var(--transition-medium);
+                z-index: 100;
+            }
+            
+            .navLinksActive {
+                right: 0;
+            }
+            
+            .mobileMenuToggle {
+                display: block;
+            }
+            
+            .navOverlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--transition-medium);
+            }
+            
+            .navOverlayActive {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .heroTitle {
+                font-size: 2.8rem;
+            }
+            
+            .sectionTitle {
+                font-size: 2rem;
+            }
+            
+            .aboutStats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .heroBtns {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .heroBtns .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .testimonialCard {
+                padding: 2rem;
+            }
+            
+            .portfolioTabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* 3D Scroll Effect */
+        .section {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+        
+        .scrollEffect {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .slideInUp {
+            animation: slideInUp 1s ease forwards;
+        }
+        
+        .animateDelay1 {
+            animation-delay: 0.2s;
+        }
+        
+        .animateDelay2 {
+            animation-delay: 0.4s;
+        }
+        
+        .animateDelay3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Dropdown Animation */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdownMenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-medium);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdownMenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdownItem {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .dropdownItem:hover {
+            background-color: var(--accent-color);
+            color: var(--text-primary);
+        }
+        
+        /* Parallax Background */
+        .parallaxBg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .parallaxElement {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            will-change: transform;
+        }
+        
+        .parallaxElement1 {
+            top: 20%;
+            left: 15%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: floatAnimation 12s ease-in-out infinite;
+        }
+        
+        .parallaxElement2 {
+            top: 60%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #3498db 0%, transparent 70%);
+            filter: blur(30px);
+            animation: floatAnimation 15s ease-in-out infinite reverse;
+        }
+        
+        .parallaxElement3 {
+            bottom: 20%;
+            left: 25%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #9b59b6 0%, transparent 70%);
+            filter: blur(15px);
+            animation: floatAnimation 18s ease-in-out infinite 1s;
+        }
+        
+        /* Scroll Trigger Animations */
+        .revealOnScroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .revealOnScroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 3D Layer Effect */
+        .sectionLayer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.5));
+            transform: translateZ(-1px) scale(1.1);
+            will-change: transform;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container navContainer">
+            <a href="#" class="logo">Rusca<span>Design</span></a>
+            <nav class="navLinks">
+                <a href="#home" class="navLink active">Ana Sayfa</a>
+                <a href="#about" class="navLink">Hakkımda</a>
+                <a href="#services" class="navLink">Hizmetler</a>
+                <a href="#portfolio" class="navLink">Portfolyo</a>
+                <a href="#testimonials" class="navLink">Yorumlar</a>
+                <a href="#contact" class="navLink">İletişim</a>
+                <div class="dropdown">
+                    <a href="#" class="navLink">Daha Fazla</a>
+                    <div class="dropdownMenu">
+                        <a href="#" class="dropdownItem">Blog</a>
+                        <a href="#" class="dropdownItem">SSS</a>
+                        <a href="#" class="dropdownItem">Kaynaklar</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="navOverlay"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="heroSection section">
+        <div class="heroBackground">
+            <div class="heroBg1"></div>
+            <div class="heroBg2"></div>
+            <div class="heroBg3"></div>
+        </div>
+        <div class="container heroContent">
+            <h1 class="heroTitle">Yaratıcı <span>Tasarımlar</span> ile Markanızı Yükseltin</h1>
+            <p class="heroSubtitle">Modern, etkileyici ve kullanıcı odaklı tasarımlarla dijital dünyada fark yaratıyorum.</p>
+            <div class="heroBtns">
+                <a href="#portfolio" class="btn">Projelerimi Gör</a>
+                <a href="#contact" class="btn">İletişime Geç</a>
+            </div>
+        </div>
+        <div class="scrollIndicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="aboutSection section">
+        <div class="sectionLayer"></div>
+        <div class="container">
+            <h2 class="sectionTitle revealOnScroll">Hakkımda</h2>
+            <p class="sectionSubtitle revealOnScroll animateDelay1">Tutkuyla tasarlayan bir yaratıcı</p>
+            <div class="aboutContent">
+                <div class="aboutImage revealOnScroll animateDelay2">
+                    <div class="aboutImageWrapper">
+                        <div class="aboutImageInner"></div>
+                    </div>
+                    <div class="aboutImageDecorator"></div>
+                </div>
+                <div class="aboutText revealOnScroll animateDelay3">
+                    <p>Merhaba! Ben Rusca, yaratıcı ve yenilikçi tasarımlar üreten bir tasarımcıyım. 10 yılı aşkın deneyimimle, markaların hikayelerini görsel olarak anlatmayı seviyorum.</p>
+                    <p>Her proje benim için bir tutku yolculuğu. Kullanıcı odaklı, estetik ve işlevsel tasarımlar üretmek için en son teknolojileri ve trendleri takip ediyorum.</p>
+                    <div class="aboutStats">
+                        <div class="statItem">
+                            <div class="statNumber">150+</div>
+                            <div class="statTitle">Tamamlanan Proje</div>
+                        </div>
+                        <div class="statItem">
+                            <div class="statNumber">10+</div>
+                            <div class="statTitle">Yıl Deneyim</div>
+                        </div>
+                        <div class="statItem">
+                            <div class="statNumber">95%</div>
+                            <div class="statTitle">Müşteri Memnuniyeti</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="servicesSection section">
+        <div class="servicesBackground parallaxBg">
+            <div class="parallaxElement parallaxElement1"></div>
+            <div class="parallaxElement parallaxElement2"></div>
+            <div class="parallaxElement parallaxElement3"></div>
+        </div>
+        <div class="container">
+            <h2 class="sectionTitle revealOnScroll">Hizmetler</h2>
+            <p class="sectionSubtitle revealOnScroll animateDelay1">Markanız için neler yapabilirim?</p>
+            <div class="servicesGrid">
+                <div class="serviceCard revealOnScroll animateDelay2">
+                    <i class="fas fa-paint-brush serviceIcon"></i>
+                    <h3 class="serviceTitle">UI/UX Tasarım</h3>
+                    <p class="serviceDesc">Kullanıcı dostu ve estetik arayüzler tasarlayarak dijital deneyimi zenginleştiriyorum.</p>
+                    <a href="#" class="serviceLink">Daha Fazla <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="serviceCard revealOnScroll animateDelay3">
+                    <i class="fas fa-globe serviceIcon"></i>
+                    <h3 class="serviceTitle">Web Tasarım</h3>
+                    <p class="serviceDesc">Modern, hızlı ve responsive web siteleriyle markanızı dijitalde güçlendiriyorum.</p>
+                    <a href="#" class="serviceLink">Daha Fazla <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="serviceCard revealOnScroll animateDelay2">
+                    <i class="fas fa-pen-nib serviceIcon"></i>
+                    <h3 class="serviceTitle">Grafik Tasarım</h3>
+                    <p class="serviceDesc">Logolar, afişler ve daha fazlasıyla markanızın görsel kimliğini oluşturuyorum.</p>
+                    <a href="#" class="serviceLink">Daha Fazla <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolioSection section">
+        <div class="sectionLayer"></div>
+        <div class="container">
+            <h2 class="sectionTitle revealOnScroll">Portfolyo</h2>
+            <p class="sectionSubtitle revealOnScroll animateDelay1">Yaratıcı çalışmalarım</p>
+            <div class="portfolioTabs revealOnScroll animateDelay2">
+                <div class="portfolioTab active">Tümü</div>
+                <div class="portfolioTab">UI/UX</div>
+                <div class="portfolioTab">Web Tasarım</div>
+                <div class="portfolioTab">Grafik Tasarım</div>
+            </div>
+            <div class="portfolioGrid">
+                <div class="portfolioItem revealOnScroll animateDelay3">
+                    <div class="portfolioImage" style="background-image: url('/api/placeholder/600/450');"></div>
+                    <div class="portfolioOverlay">
+                        <h3 class="portfolioTitle">Modern Web Sitesi</h3>
+                        <p class="portfolioCategory">Web Tasarım</p>
+                    </div>
+                </div>
+                <div class="portfolioItem revealOnScroll animateDelay2">
+                    <div class="portfolioImage" style="background-image: url('/api/placeholder/600/450');"></div>
+                    <div class="portfolioOverlay">
+                        <h3 class="portfolioTitle">Mobil Uygulama</h3>
+                        <p class="portfolioCategory">UI/UX</p>
+                    </div>
+                </div>
+                <div class="portfolioItem revealOnScroll animateDelay3">
+                    <div class="portfolioImage" style="background-image: url('/api/placeholder/600/450');"></div>
+                    <div class="portfolioOverlay">
+                        <h3 class="portfolioTitle">Marka Logosu</h3>
+                        <p class="portfolioCategory">Grafik Tasarım</p>
+                    </div>
+                </div>
+                <div class="portfolioItem revealOnScroll animateDelay2">
+                    <div class="portfolioImage" style="background-image: url('/api/placeholder/600/450');"></div>
+                    <div class="portfolioOverlay">
+                        <h3 class="portfolioTitle">E-Ticaret Sitesi</h3>
+                        <p class="portfolioCategory">Web Tasarım</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonialsSection section">
+        <div class="container">
+            <h2 class="sectionTitle revealOnScroll">Müşteri Yorumları</h2>
+            <p class="sectionSubtitle revealOnScroll animateDelay1">Müşterilerim ne diyor?</p>
+            <div class="testimonialSlider revealOnScroll animateDelay2">
+                <div class="testimonialWrapper">
+                    <div class="testimonialItem">
+                        <div class="testimonialCard">
+                            <i class="fas fa-quote-left testimonialQuote"></i>
+                            <p class="testimonialText">Rusca ile çalışmak inanılmaz bir deneyimdi! Tasarımları hem modern hem de kullanıcı dostu. Kesinlikle tekrar çalışacağım!</p>
+                            <div class="testimonialAuthor">
+                                <div class="testimonialAvatar">
+                                    <img src="/api/placeholder/60/60" alt="Avatar">
+                                </div>
+                                <div class="testimonialInfo">
+                                    <div class="testimonialName">Ayşe Yılmaz</div>
+                                    <div class="testimonialRole">Startup Kurucusu</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonialItem">
+                        <div class="testimonialCard">
+                            <i class="fas fa-quote-left testimonialQuote"></i>
+                            <p class="testimonialText">Rusca'nın yaratıcılığı ve profesyonelliği projemizi bir üst seviyeye taşıdı. Harika bir iş çıkardı!</p>
+                            <div class="testimonialAuthor">
+                                <div class="testimonialAvatar">
+                                    <img src="/api/placeholder/60/60" alt="Avatar">
+                                </div>
+                                <div class="testimonialInfo">
+                                    <div class="testimonialName">Mehmet Kaya</div>
+                                    <div class="testimonialRole">E-Ticaret Yöneticisi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonialNav">
+                    <div class="testimonialNavBtn testimonialPrev"><i class="fas fa-chevron-left"></i></div>
+                    <div class="testimonialNavBtn testimonialNext"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="testimonialDots">
+                    <div class="testimonialDot active"></div>
+                    <div class="testimonialDot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contactSection section">
+        <div class="sectionLayer"></div>
+        <div class="container">
+            <h2 class="sectionTitle revealOnScroll">İletişime Geç</h2>
+            <p class="sectionSubtitle revealOnScroll animateDelay1">Birlikte harika projeler yapalım!</p>
+            <div class="contactGridWrapper">
+                <div class="contactInfo revealOnScroll animateDelay2">
+                    <div class="contactInfoItems">
+                        <div class="contactInfoItem">
+                            <i class="fas fa-envelope contactInfoIcon"></i>
+                            <div class="contactInfoContent">
+                                <h4>E-posta</h4>
+                                <p>info@ruscadesign.com</p>
+                            </div>
+                        </div>
+                        <div class="contactInfoItem">
+                            <i class="fas fa-phone contactInfoIcon"></i>
+                            <div class="contactInfoContent">
+                                <h4>Telefon</h4>
+                                <p>+90 123 456 78 90</p>
+                            </div>
+                        </div>
+                        <div class="contactInfoItem">
+                            <i class="fas fa-map-marker-alt contactInfoIcon"></i>
+                            <div class="contactInfoContent">
+                                <h4>Adres</h4>
+                                <p>İstanbul, Türkiye</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="socialLinks">
+                        <a href="#" class="socialLink"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="socialLink"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="socialLink"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="contactForm revealOnScroll animateDelay3">
+                    <form>
+                        <div class="inputGroup">
+                            <label for="name">Adınız</label>
+                            <input type="text" id="name" class="formInput" placeholder="Adınızı girin" required>
+                        </div>
+                        <div class="inputGroup">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" class="formInput" placeholder="E-posta adresinizi girin" required>
+                        </div>
+                        <div class="inputGroup">
+                            <label for="message">Mesajınız</label>
+                            <textarea id="message" class="formInput" placeholder="Mesajınızı yazın" required></textarea>
+                        </div>
+                        <button type="submit" class="contactBtn">Mesaj Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footerTop">
+            <div class="footerCol">
+                <h3 class="footerTitle">Rusca Design</h3>
+                <p>Yaratıcı tasarımlarla markanızı güçlendirin.</p>
+            </div>
+            <div class="footerCol">
+                <h3 class="footerTitle">Hızlı Bağlantılar</h3>
+                <ul class="footerNav">
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#about">Hakkımda</a></li>
+                    <li><a href="#services">Hizmetler</a></li>
+                    <li><a href="#portfolio">Portfolyo</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footerCol">
+                <h3 class="footerTitle">İletişim</h3>
+                <div class="footerContact">
+                    <p><i class="fas fa-envelope"></i> info@ruscadesign.com</p>
+                    <p><i class="fas fa-phone"></i> +90 123 456 78 90</p>
+                    <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+                </div>
+            </div>
+        </div>
+        <div class="footerBottom">
+            <p>&copy; 2025 Rusca Design. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('headerScrolled');
+            } else {
+                header.classList.remove('headerScrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.querySelector('.mobileMenuToggle');
+        const navLinks = document.querySelector('.navLinks');
+        const navOverlay = document.querySelector('.navOverlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('navLinksActive');
+            navOverlay.classList.toggle('navOverlayActive');
+            mobileMenuToggle.innerHTML = navLinks.classList.contains('navLinksActive')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        navOverlay.addEventListener('click', () => {
+            navLinks.classList.remove('navLinksActive');
+            navOverlay.classList.remove('navOverlayActive');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                // Update active nav link
+                document.querySelectorAll('.navLink').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+                // Close mobile menu if open
+                navLinks.classList.remove('navLinksActive');
+                navOverlay.classList.remove('navOverlayActive');
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.revealOnScroll');
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('revealed');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Parallax Effect
+        const parallaxElements = document.querySelectorAll('.parallaxElement');
+        window.addEventListener('scroll', () => {
+            parallaxElements.forEach(element => {
+                const speed = element.getAttribute('data-speed') || 0.5;
+                const yPos = -(window.scrollY * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialWrapper = document.querySelector('.testimonialWrapper');
+        const testimonialItems = document.querySelectorAll('.testimonialItem');
+        const testimonialDots = document.querySelectorAll('.testimonialDot');
+        const prevBtn = document.querySelector('.testimonialPrev');
+        const nextBtn = document.querySelector('.testimonialNext');
+        let currentSlide = 0;
+
+        const updateSlider = () => {
+            testimonialWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            testimonialDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        };
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % testimonialItems.length;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + testimonialItems.length) % testimonialItems.length;
+            updateSlider();
+        });
+
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        // Portfolio Tabs
+        const portfolioTabs = document.querySelectorAll('.portfolioTab');
+        const portfolioItems = document.querySelectorAll('.portfolioItem');
+
+        portfolioTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                portfolioTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const category = tab.textContent.toLowerCase();
+                portfolioItems.forEach(item => {
+                    const itemCategory = item.querySelector('.portfolioCategory').textContent.toLowerCase();
+                    if (category === 't-МёБм' || category === itemCategory) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.classList.add('revealed'), 100);
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('revealed');
+                    }
+                });
+            });
+        });
+
+        // 3D Scroll Effect
+        const sections = document.querySelectorAll('.section');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isInView = rect.top <= window.innerHeight && rect.bottom >= 0;
+
+                if (isInView) {
+                    const translateZ = scrollDirection === 'down' ? -index * 50 : index * 50;
+                    section.style.transform = `translateZ(${translateZ}px)`;
+                    section.style.opacity = 1;
+                } else {
+                    section.style.transform = 'translateZ(0)';
+                    section.style.opacity = 0.7;
+                }
+            });
+
+            lastScrollY = currentScrollY;
+        });
+
+        // Form Submission
+        const contactForm = document.querySelector('.contactForm form');
+        contactForm.addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Mesajınız gönderildi! En kısa sürede size geri döneceğim.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+  </html>
